@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+CO&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding:0;
+    margin:0;
+    font-family: 'Poppins',sans-serif;
+}
+body{
+    background-color: #000;
+    color:white;
+   
+}
+
+
+header{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding:.8rem .8rem;
+    background-color: #300c51;
+    color:white;
+    font-size:.85rem;
+    
+}
+
+
+.nav-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.nav-bar a{
+    color:white;
+    text-decoration: none;
+    font-weight:bold;
+}
+
+.nav-bar a:hover{
+    font-size:larger;
+    transition-duration: 1s;
+}
+
+.molapeople{
+}
+
+.left-side{
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    align-items: center;
+    padding-left: 4rem;
+}
+.mola-logo{
+    cursor:pointer;
+}
+/* .mola-logo:hover{
+    width:8rem;
+    transition-duration: 1s;
+} */
+.right-side{
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    align-items: center;
+    padding-right: 4rem;
+}
+
+.nav-bar img{
+    width:7rem;
+    padding-left:20px;
+}
+
+.main-video{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:-2;
+    width:100%;
+    min-height: 100%;
+    filter: blur(2px); 
+}
+
+
+
+.hero-h1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:100%;
+    height:100%;
+    position: relative;
+    top:7.5rem;
+
+}
+
+.hero-h1 h1{
+    font-family: 'Playfair Display';
+    text-align: center;
+    font-size:3rem;
+}
+
+
+.hero-h1 button{
+    align-self: center;
+   padding:.8rem 2.5rem;
+   color:white;
+   border:1px solid white;
+   margin-top:1rem;
+   background-color: transparent;
+   cursor:pointer;
+}
+
+.hero-h1 button:hover{
+    color:#000;
+    background-color: #fff;
+    transition-duration: 1s;
+}
+
+
+.hero-h1 span{
+    font-style: italic;
+    font-family: 'Playfair Display';
+
+}
+
+
+main{
+    background-color: #fff;
+    position: relative;
+    top:400px;
+    text-align: center;
+    padding-top:3rem;
+    
+}
+main h3{
+    padding-bottom:1rem;
+    font-weight:normal;
+    color: #db9457;
+}
+main h1{
+    font-family: 'Lucida Sans';
+    text-align: center;
+    font-size:3rem;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+.vertical-line{
+    background-color: #db9457;
+    width:3px;
+    height:3rem;
+}
+
+main p{
+    line-height: 2.3rem;
+    font-weight: 300;
+}
+
+.content-box-container{
+    margin-top:5rem;
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+    z-index: -2;
+}
+
+
+.content-box img{
+    width:27rem;
+    height:37rem;
+    object-fit: cover;
+}
+
+.content-box video{
+    width:27rem;
+    height:37rem;
+    object-fit: cover;
+   
+    
+}
+
+
+
+.content-box{
+    position: relative;
+}
+
+
+.text-overlay{
+    position: absolute;
+    top:0;
+    left:0;
+    color:white;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap:1rem;
+    width: 100%;
+    height:100%;
+    padding:0 2rem;
+}
+
+.author-credit{
+    font-size: smaller;
+}
+
+
+
+.text-overlay h2{
+    font-family:'Playfair Display',arial;
+    font-size:2.4rem;
+}
+
+
+
+.text-overlay button{
+    text-align: center;
+    align-self: flex-start;
+    padding:.8rem 2.5rem;
+    margin-bottom: 3rem;
+    text-decoration: none;
+    color:black;
+    background-color: white;
+    border:none;
+    cursor:pointer;
+}
+.text-overlay button:hover{
+    background-color: transparent;
+    color:white;
+    border:1px solid white;
+    transition-duration: 1s;
+    font-family: 'Playfair Display';
+}
+
+.content-box-container{
+    margin:2rem 5rem;
+}
+
+
+.text-overlay button:hover{
+    background-color: black;
+    color:white;
+    border:1px solid white;
+    transition-duration: .5s;
+    font-family: 'Playfair Display';
+    
+}
+
+
+
+
+
+
+
+/* #last-card{
+    background-color: whitesmoke;
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+} */
+.last-card{
+    height:25rem; 
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+.last-card p{
+    font-size: smaller;
+}
+
+#last-card1{
+    background-color: #fafafb;
+}
+
+#last-card2{
+    background-color: #f4f4f5;
+}
+#last-card3{
+    background-color: #fafafb;
+}
+
+#last-card4{
+    background-color: #f6f7f6;
+}
+
+
+.footer-links{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(4, 4, 30);
+    color:white;
+    padding:2.4rem 0;
+
+    
+}
+
+.links1{
+    position: relative;
+    bottom:1.64rem;
+    
+}
+
+.links1 img{
+    width:2.3rem;
+    object-fit: cover;
+    padding-top: 1rem;
+}
+
+
+
+
+.video-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-image {
+  width: 300px;
+  height: auto;
+  display: block;
+}
+
+.follower {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle, #f5e9d7, #e3d0b9); /* subtle gradient */
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px rgba(245, 233, 215, 0.8); /* soft glow */
+  transition: opacity 0.3s ease, transform 0.1s ease;
+  backdrop-filter: blur(2px); /* adds a nice touch on supported browsers */
+}

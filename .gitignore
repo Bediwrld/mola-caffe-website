@@ -1,0 +1,25 @@
+# Font files (too large for GitHub)
+ouroboros/
+*.otf
+*.ttf
+*.eot
+*.woff
+*.woff2
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
