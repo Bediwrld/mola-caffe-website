@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>#PeopleOfMola Gallery — Infinite Ticker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --accent:#db9457;
+      --bg-mid:rgb(20,31,31);
+      --color-primary:#db9457;
+      --color-light:#ffffff;
+      --transition:all .3s ease;
+      --gap:30px; /* space between cards */
+      --edge-fade:140px; /* width of side fade */
+      --ticker-speed:0.9; /* px per frame */
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(to right, #000 0%, var(--bg-mid) 50%, #000 100%);
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar{display:flex;justify-content:space-between;position:fixed;top:0;left:0;width:100%;padding:20px;align-items:center;background:rgba(20,31,31,.5);backdrop-filter:blur(5px);transition:var(--transition);z-index:1000}
+    .navbar.scrolled{background:rgba(20,31,31,.65);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.1);box-shadow:0 4px 30px rgba(0,0,0,.1)}
+    .nav-brand{display:flex;align-items:center;gap:10px}
+    .nav-brand img{width:50px;height:50px;border-radius:50%}
+    .nav-brand span{font-size:1.5rem;font-weight:600;color:var(--color-primary)}
+    .nav-menu{display:flex;gap:30px;list-style:none;margin:0;padding:0}
+    .nav-link{color:var(--color-light);text-decoration:none;font-weight:500;transition:var(--transition);position:relative;padding-bottom:5px}
+    .nav-link::after{content:"";position:absolute;width:0;height:2px;bottom:0;left:50%;background-color:var(--color-primary);transition:all .3s ease-in-out;transform:translateX(-50%)}
+    .nav-link:hover{color:var(--color-primary)}
+    .nav-link:hover::after{width:100%}
+    .nav-toggle{display:none;cursor:pointer}
+    .nav-toggle span{display:block;width:25px;height:2px;background:var(--color-light);margin:5px 0;transition:var(--transition)}
+
+    /* ===== SECTION ===== */
+    .gallery-section{text-align:center;padding:40px 20px 80px}
+    .gallery-section h1{margin-top: 65px;font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:2.6rem;margin-bottom:26px;text-shadow:0 6px 18px rgba(0,0,0,.6)}
+ 
+
+    /* ===== TICKER ===== */
+    .ticker-viewport{
+      position:relative;
+      overflow:hidden;
+      padding:40px 0;
+      /* soft vignette at the edges (works in all modern browsers) */
+      -webkit-mask-image:linear-gradient(to right, transparent 0, #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), transparent 100%);
+              mask-image:linear-gradient(to right, transparent 0, #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), transparent 100%);
+    }
+
+    .ticker-track{
+      display:flex;
+      gap:var(--gap);
+      will-change:transform;
+      transform:translateX(0);
+    }
+
+    /* ===== CARD ===== */
+    .card{position:relative;width:260px;flex:0 0 auto;border-radius:16px;overflow:hidden;cursor:pointer;box-shadow:0 15px 35px rgba(0,0,0,.7), 0 0 60px rgba(0,0,0,.3) inset;transition:transform .25s ease, box-shadow .25s ease;filter:brightness(.9);transform-origin:center}
+    .card:hover{transform:scale(1.05);box-shadow:0 20px 50px rgba(0,0,0,.8), 0 0 80px rgba(219,148,87,.4) inset;filter:brightness(1.05)}
+    .card img{display:block;width:100%;height:350px;object-fit:cover}
+
+    .overlay{position:absolute;left:0;right:0;bottom:0;padding:16px 12px;background:linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.3));color:#fff;font-size:.95rem;border-radius:0 0 16px 16px;opacity:0;transform:translateY(20px);transition:opacity .22s ease, transform .22s ease;pointer-events:none}
+    .card:hover .overlay, .card:focus-within .overlay{opacity:1;transform:translateY(0)}
+    .overlay .author{display:block;margin-top:8px;color:var(--accent);font-style:italic;font-weight:600;font-size:.88rem}
+
+    /* ===== Accessibility: allow keyboard focus ===== */
+    .card[tabindex]{outline:none}
+    .card:focus{box-shadow:0 0 0 3px rgba(219,148,87,.25), 0 15px 35px rgba(0,0,0,.7)}
+
+    /* ===== Responsive ===== */
+    @media (max-width:900px){.card{width:220px}.card img{height:320px}}
+    @media (max-width:600px){.card{width:180px}.card img{height:240px}.gallery-section h1{font-size:1.9rem}}
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .ticker-track{transition:none;animation:none}
+      .card:hover{transform:none}
+    }
+
+
+      
+.cursor-follower {
+  width: 20px;
+  height: 20px;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.9;
+  mix-blend-mode: difference;
+  box-shadow: 
+    0 0 10px rgb(255, 255, 255),
+    0 0 20px rgba(255, 255, 255, 0.937),
+    0 0 30px rgba(255, 255, 255, 0.952);
+  transition: transform 0.15s ease-out;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cursor-follower.active {
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0.8;
+}
+
+/* Hide cursor follower on mobile/touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-follower {
+    display: none;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="cursor-follower"></div>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <img src="/Project/mola-cafe-pictures/mola-logo-150x150.png" alt="Mola Caffe Logo" />
+      <span>Mola Caffe</span>
+    </div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <ul class="nav-menu">
+      <li><a href="/Project/index.html#home" class="nav-link">Home</a></li>
+      <li><a href="/Project/people-of-mola/m.html" class="nav-link">#peopleofmola</a></li>
+      <li><a href="/Project/menu/menu.html" class="nav-link">Menu</a></li>
+      <li><a href="/Project/contact/contact.html" class="nav-link">Contact us</a></li>
+    </ul>
+  </nav>
+
+  <section class="gallery-section" id="people">
+    <h1 class="people-heading">#peopleofmola</h1>
+
+    <div class="ticker-viewport" id="tickerViewport">
+      <div class="ticker-track" id="tickerTrack">
+        <!-- Seed cards (only once) -->
+        <div class="card" tabindex="0">
+          <img src="images/img1.jpg" alt="Coffee moment 1" />
+          <div class="overlay">Best cappuccino in town!<span class="author">- Sarah M.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img2.jpg" alt="Coffee moment 2" />
+          <div class="overlay">Best cappuccino in town!<span class="author">- Sarah M.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img3.jpg" alt="Coffee moment 3" />
+          <div class="overlay">Best cappuccino in town!<span class="author">- Sarah M.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img4.jpg" alt="Coffee moment 4" />
+          <div class="overlay">Best cappuccino in town!<span class="author">- Sarah M.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img5.jpg" alt="Coffee moment 5" />
+          <div class="overlay">Amazing espresso!<span class="author">- Mike R.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img6.jpg" alt="Coffee moment 6" />
+          <div class="overlay">Specialty drinks are incredible!<span class="author">- Emma K.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img7.jpg" alt="Coffee moment 7" />
+          <div class="overlay">Great place to work or relax.<span class="author">- David L.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img8.jpg" alt="Coffee moment 8" />
+          <div class="overlay">Great place to work or relax.<span class="author">- David L.</span></div>
+        </div>
+        <div class="card" tabindex="0">
+          <img src="images/img10.jpg" alt="Coffee moment 9" />
+          <div class="overlay">Great place to work or relax.<span class="author">- David L.</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    
+    // ===== Navbar visual change on scroll =====
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ===== Mobile toggle (if you add mobile styles later) =====
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    navToggle?.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
+    });
+
+    // ===== Truly infinite ticker (no jump, no twitch) =====
+    (function(){
+      const viewport = document.getElementById('tickerViewport');
+      const track    = document.getElementById('tickerTrack');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!viewport || !track || prefersReduced) return;
+
+      // Keep originals so we can rebuild on resize
+      const seedCards = Array.from(track.children).map(n => n.cloneNode(true));
+
+      let offset = 0; // current translateX
+      let speed  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ticker-speed')) || 0.9;
+      let gapPx  = 0;
+      let reqId  = null;
+
+      function pxToNumber(px){ return Number(px.replace('px','')) || 0; }
+
+      function build(){
+        // reset
+        track.innerHTML = '';
+        seedCards.forEach(c => track.appendChild(c.cloneNode(true)));
+
+        // compute gap from CSS flex gap
+        const cs = getComputedStyle(track);
+        gapPx = pxToNumber(cs.gap);
+
+        // clone until we have at least 2x viewport width so we can cycle
+        const targetWidth = viewport.clientWidth * 2 + 2 * gapPx;
+        while (track.scrollWidth < targetWidth){
+          seedCards.forEach(c => track.appendChild(c.cloneNode(true)));
+        }
+
+        offset = 0;
+        track.style.transform = 'translateX(0)';
+      }
+
+      function step(){
+        offset -= speed; // move left
+
+        // When the first card is fully out of view, move it to the end and adjust offset
+        const first = track.firstElementChild;
+        if (first){
+          const firstWidth = first.offsetWidth; // layout width (ignores transform scale)
+          const threshold = -(firstWidth + gapPx);
+          if (offset <= threshold){
+            // move first to end
+            track.appendChild(first);
+            offset -= threshold; // bring track forward by exactly the amount we removed
+          }
+        }
+
+        track.style.transform = `translateX(${offset}px)`;
+        reqId = requestAnimationFrame(step);
+      }
+
+      function start(){ cancelAnimationFrame(reqId); build(); reqId = requestAnimationFrame(step); }
+
+      // Debounce resize rebuild
+      let rAF = null;
+      window.addEventListener('resize', () => {
+        if (rAF) cancelAnimationFrame(rAF);
+        rAF = requestAnimationFrame(start);
+      });
+
+      start();
+    })();
+
+
+
+    
+const ball = document.querySelector('.cursor-follower');
+
+let targetX = window.innerWidth / 2;
+let targetY = window.innerHeight / 2;
+let currentX = targetX;
+let currentY = targetY;
+
+document.addEventListener('mousemove', (e) => {
+  targetX = e.clientX;
+  targetY = e.clientY;
+});
+function animate() {
+  currentX += (targetX - currentX) * 0.1; // smooth easing
+  currentY += (targetY - currentY) * 0.1;
+
+  ball.style.left = `${currentX}px`;
+  ball.style.top = `${currentY}px`;
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+const links = document.querySelectorAll('a');
+links.forEach(link => {
+  link.addEventListener('mouseover', () => {
+    ball.classList.add('hidden'); // fades out
+  });
+  link.addEventListener('mouseout', () => {
+    ball.classList.remove('hidden'); // fades in
+  });
+});
+
+const button = document.querySelectorAll('button');
+
+button.forEach(btn =>{
+  btn.addEventListener('mouseover', () => {
+    ball.classList.add('hidden'); // fades out
+  });
+  btn.addEventListener('mouseout', () => {
+    ball.classList.remove('hidden'); // fades in
+  });
+})
+  </script>
+</body>
+</html>
