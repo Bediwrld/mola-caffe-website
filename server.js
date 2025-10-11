@@ -12,7 +12,7 @@ app.use(cors({
     'http://127.0.0.1:5501',
     'https://mola.mk',
     'https://www.mola.mk',
-    'https://*.github.io' // If using GitHub Pages
+    'https://bediwrld.github.io'
   ]
 }));
 
