@@ -1,24 +1,37 @@
-require('dotenv').config();
 const express = require('express');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-  origin: [
-    'http://localhost:5500', 
-    'http://localhost:5501',
-    'http://127.0.0.1:5500',
-    'http://127.0.0.1:5501',
-    'https://mola.mk',
-    'https://www.mola.mk',
-    'https://bediwrld.github.io'
-  ],
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
-app.options('/api/contact', cors()); // handle preflight
+
+// Allow frontend origins
+const allowedOrigins = [
+  'http://localhost:5500',
+  'http://localhost:5501',
+  'http://127.0.0.1:5500',
+  'http://127.0.0.1:5501',
+  'https://mola.mk',
+  'https://www.mola.mk',
+  'https://bediwrld.github.io'
+];
+
+// CORS middleware
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  // Allow preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -26,25 +39,24 @@ app.post('/api/contact', async (req, res) => {
   let transporter = nodemailer.createTransport({
     host: "smtp-relay.brevo.com",
     port: 587,
-    secure: false, // TLS
+    secure: false,
     auth: {
       user: process.env.brevo_user,
       pass: process.env.brevo_pass
     }
   });
-  console.log("Using SMTP user:", process.env.brevo_user);
 
-  
+  console.log("Using SMTP user:", process.env.brevo_user);
 
   try {
     await transporter.sendMail({
-      from: '"Mola Caffe Contact" <pajazitiubejd1@gmail.com>',
+      from: `"Mola Caffe Contact" <${process.env.brevo_user}>`,
       to: 'onlycoins1905@gmail.com',
       subject: subject,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
       html: `<p><strong>Name:</strong> ${name}<br>
-           <strong>Email:</strong> ${email}<br><br>
-           ${message.replace(/\n/g, '<br>')}</p>`,
+             <strong>Email:</strong> ${email}<br><br>
+             ${message.replace(/\n/g, '<br>')}</p>`,
       replyTo: email
     });
     res.status(200).json({ success: true });
@@ -54,6 +66,5 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// Use Railway's PORT or default to 3001
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
