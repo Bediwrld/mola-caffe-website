@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mola Caffe Menu</title>
   <link rel="stylesheet" href="menu.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!-- Cursor Follower -->
+  <div class="cursor-follower"></div>
+
   <nav class="navbar">
     <div class="nav-brand">
       <img src="/Project/mola-cafe-pictures/logo-150x150.png" alt="Mola Caffe Logo">
@@ -17,70 +21,98 @@
       <span></span><span></span><span></span>
     </div>
     <ul class="nav-menu">
-      <li><a href="/index.html" class="nav-link">Home</a></li>
+      <li><a href="/Project/main/index.html" class="nav-link">Home</a></li>
       <li><a href="/Project/people-of-mola/peopleofmola.html" class="nav-link">#peopleofmola</a></li>
       <li><a href="#menu" class="nav-link active">Menu</a></li>
       <li><a href="/Project/contact/contact.html" class="nav-link">Contact us</a></li>
     </ul>
   </nav>
 
+  <!-- Hero Section -->
+  <section class="menu-hero">
+    <div class="menu-hero-content">
+      <h1 class="fade-up">Our Menu</h1>
+      <p class="fade-up delay-1">Crafted with passion, served with love</p>
+      <div class="menu-nav-buttons fade-up delay-2">
+        <a href="#hot-drinks" class="menu-nav-btn"><i class="fas fa-mug-hot"></i> Hot Drinks</a>
+        <a href="#cold-drinks" class="menu-nav-btn"><i class="fas fa-glass-whiskey"></i> Cold Drinks</a>
+        <a href="#tea" class="menu-nav-btn"><i class="fas fa-leaf"></i> Tea</a>
+      </div>
+    </div>
+  </section>
+
   <main class="menu-container">
     <section class="menu-section" id="hot-drinks">
-      <h2 class="h2Hot-Drinks">Hot Drinks</h2>
+      <div class="section-header fade-up">
+        <i class="fas fa-mug-hot section-icon"></i>
+        <h2>Hot Drinks</h2>
+      </div>
       <div class="menu-items">
-        <div class="menu-item"><h3>Cappuccino</h3><p>Espresso, steamed milk, foam</p><span>120mkd</span></div>
-        <div class="menu-item"><h3>Caramel Latte</h3><p>Espresso, caramel, steamed milk</p><span>140mkd</span></div>
-        <div class="menu-item"><h3>Latte</h3><p>Espresso, steamed milk</p><span>120mkd</span></div>
-        <div class="menu-item"><h3>Mocha</h3><p>Espresso, chocolate, steamed milk</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Espresso</h3><p>Rich espresso shot</p><span>90mkd</span></div>
-        <div class="menu-item"><h3>Americano</h3><p>Espresso with hot water</p><span>100mkd</span></div>
-        <div class="menu-item"><h3>Macchiato</h3><p>Espresso with a dollop of foam</p><span>100mkd</span></div>
-        <div class="menu-item"><h3>Vanilla Latte</h3><p>Espresso, vanilla, steamed milk</p><span>140mkd</span></div>
-        <div class="menu-item"><h3>Hazelnut Latte</h3><p>Espresso, hazelnut, steamed milk</p><span>140mkd</span></div>
-        <div class="menu-item"><h3>Caramel Macchiato</h3><p>Espresso, caramel, steamed milk, foam</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Hazelnut Macchiato</h3><p>Espresso, hazelnut, steamed milk, foam</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Vanilla Macchiato</h3><p>Espresso, vanilla, steamed milk, foam</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Irish Coffee</h3><p>Espresso, Irish whiskey, cream</p><span>180mkd</span></div>
-        <div class="menu-item"><h3>Affogato</h3><p>Espresso poured over vanilla ice cream</p><span>160mkd</span></div>
-        <div class="menu-item"><h3>Coconut Coffee</h3><p>Espresso, coconut milk</p><span>140mkd</span></div>
+        <div class="menu-item fade-up"><h3>Cappuccino</h3><p>Espresso, steamed milk, foam</p><span>120mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Caramel Latte</h3><p>Espresso, caramel, steamed milk</p><span>140mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Latte</h3><p>Espresso, steamed milk</p><span>120mkd</span></div>
+        <div class="menu-item fade-up"><h3>Mocha</h3><p>Espresso, chocolate, steamed milk</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Espresso</h3><p>Rich espresso shot</p><span>90mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Americano</h3><p>Espresso with hot water</p><span>100mkd</span></div>
+        <div class="menu-item fade-up"><h3>Macchiato</h3><p>Espresso with a dollop of foam</p><span>100mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Vanilla Latte</h3><p>Espresso, vanilla, steamed milk</p><span>140mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Hazelnut Latte</h3><p>Espresso, hazelnut, steamed milk</p><span>140mkd</span></div>
+        <div class="menu-item fade-up"><h3>Caramel Macchiato</h3><p>Espresso, caramel, steamed milk, foam</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Hazelnut Macchiato</h3><p>Espresso, hazelnut, steamed milk, foam</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Vanilla Macchiato</h3><p>Espresso, vanilla, steamed milk, foam</p><span>150mkd</span></div>
+        <div class="menu-item fade-up"><h3>Irish Coffee</h3><p>Espresso, Irish whiskey, cream</p><span>180mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Affogato</h3><p>Espresso poured over vanilla ice cream</p><span>160mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Coconut Coffee</h3><p>Espresso, coconut milk</p><span>140mkd</span></div>
       </div>
     </section>
+
     <section class="menu-section" id="cold-drinks">
-      <h2>Cold Drinks</h2>
+      <div class="section-header fade-up">
+        <i class="fas fa-glass-whiskey section-icon"></i>
+        <h2>Cold Drinks</h2>
+      </div>
       <div class="menu-items">
-        <div class="menu-item"><h3>Iced Latte</h3><p>Espresso, milk, ice</p><span>130mkd</span></div>
-        <div class="menu-item"><h3>Iced Mocha</h3><p>Espresso, chocolate, milk, ice</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Iced Caramel Macchiato</h3><p>Espresso, caramel, milk, ice</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Iced Vanilla Latte</h3><p>Espresso, vanilla, milk, ice</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Cold Brew</h3><p>Slow-steeped cold brew coffee</p><span>140mkd</span></div>
-        <div class="menu-item"><h3>Nitro Cold Brew</h3><p>Cold brew infused with nitrogen</p><span>160mkd</span></div>
-        <div class="menu-item"><h3>Frappuccino</h3><p>Blended coffee, ice, milk</p><span>140mkd</span></div>
-        <div class="menu-item"><h3>Caramel Frappuccino</h3><p>Blended coffee, caramel, ice, milk</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Mocha Frappuccino</h3><p>Blended coffee, chocolate, ice, milk</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Vanilla Frappuccino</h3><p>Blended coffee, vanilla, ice, milk</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Hazelnut Frappuccino</h3><p>Blended coffee, hazelnut, ice, milk</p><span>150mkd</span></div>
-        <div class="menu-item"><h3>Vietnamese Iced Coffee</h3><p>Strong coffee, sweetened condensed milk, ice</p><span>160mkd</span></div>
-        <div class="menu-item"><h3>Coconut Juice</h3><p>Fresh coconut juice, served cold</p><span>120mkd</span></div>
-        <div class="menu-item"><h3>Pineapple Juice</h3><p>Fresh pineapple juice, served cold</p><span>120mkd</span></div>
+        <div class="menu-item fade-up"><h3>Iced Latte</h3><p>Espresso, milk, ice</p><span>130mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Iced Mocha</h3><p>Espresso, chocolate, milk, ice</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Iced Caramel Macchiato</h3><p>Espresso, caramel, milk, ice</p><span>150mkd</span></div>
+        <div class="menu-item fade-up"><h3>Iced Vanilla Latte</h3><p>Espresso, vanilla, milk, ice</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Cold Brew</h3><p>Slow-steeped cold brew coffee</p><span>140mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Nitro Cold Brew</h3><p>Cold brew infused with nitrogen</p><span>160mkd</span></div>
+        <div class="menu-item fade-up"><h3>Frappuccino</h3><p>Blended coffee, ice, milk</p><span>140mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Caramel Frappuccino</h3><p>Blended coffee, caramel, ice, milk</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Mocha Frappuccino</h3><p>Blended coffee, chocolate, ice, milk</p><span>150mkd</span></div>
+        <div class="menu-item fade-up"><h3>Vanilla Frappuccino</h3><p>Blended coffee, vanilla, ice, milk</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Hazelnut Frappuccino</h3><p>Blended coffee, hazelnut, ice, milk</p><span>150mkd</span></div>
+        <div class="menu-item fade-up delay-2"><h3>Vietnamese Iced Coffee</h3><p>Strong coffee, sweetened condensed milk, ice</p><span>160mkd</span></div>
+        <div class="menu-item fade-up"><h3>Coconut Juice</h3><p>Fresh coconut juice, served cold</p><span>120mkd</span></div>
+        <div class="menu-item fade-up delay-1"><h3>Pineapple Juice</h3><p>Fresh pineapple juice, served cold</p><span>120mkd</span></div>
       </div>
     </section>
+
     <section class="menu-section" id="tea">
-      <h2>Tea</h2>
+      <div class="section-header fade-up">
+        <i class="fas fa-leaf section-icon"></i>
+        <h2>Tea</h2>
+      </div>
       <div class="menu-items">
-        <div class="menu-item">
+        <div class="menu-item fade-up">
           <h3>English Breakfast</h3>
           <p>Classic black tea</p>
           <span>80mkd</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item fade-up delay-1">
           <h3>Green Tea</h3>
           <p>Light and refreshing</p>
           <span>100mkd</span>
         </div>
       </div>
     </section>
-    <!-- Add more sections as needed -->
   </main>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <script>
     // Navbar Toggle
@@ -118,6 +150,96 @@
         navToggle.classList.remove('active');
         navMenu.classList.remove('active');
         body.classList.remove('menu-open');
+      }
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Cursor follower
+    const cursorFollower = document.querySelector('.cursor-follower');
+    
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let mouseX = 0;
+      let mouseY = 0;
+      let followerX = 0;
+      let followerY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animate() {
+        const distX = mouseX - followerX;
+        const distY = mouseY - followerY;
+        
+        followerX += distX * 0.1;
+        followerY += distY * 0.1;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+
+      document.addEventListener('mousedown', () => {
+        cursorFollower.classList.add('active');
+      });
+
+      document.addEventListener('mouseup', () => {
+        cursorFollower.classList.remove('active');
+      });
+    }
+
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Smooth scroll for menu nav buttons
+    document.querySelectorAll('.menu-nav-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(btn.getAttribute('href'));
+        const offset = 100;
+        const targetPosition = target.offsetTop - offset;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      });
+    });
+
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
       }
     });
   </script>

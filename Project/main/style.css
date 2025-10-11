@@ -1021,6 +1021,7 @@ body {
 }
 
 @media (max-width: 576px) {
+
   .hero-content h1 {
     font-size: 2rem;
   }
@@ -1046,6 +1047,7 @@ body {
     margin-bottom: 12px;
   }
 }
+
 
 @media (max-width: 375px) {
   .about-grid {

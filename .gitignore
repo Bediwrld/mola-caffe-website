@@ -23,3 +23,9 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Environment variables (IMPORTANT - keeps your email password safe)
+.env
+
+# Package lock (optional, but cleaner for deployments)
+package-lock.json
