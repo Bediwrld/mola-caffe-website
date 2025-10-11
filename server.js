@@ -1,13 +1,10 @@
 const express = require('express');
-const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-
 app.use(express.json());
 
-// Allow frontend origins
 const allowedOrigins = [
   'http://localhost:5500',
   'http://localhost:5501',
@@ -18,16 +15,18 @@ const allowedOrigins = [
   'https://bediwrld.github.io'
 ];
 
-// CORS middleware
+// Custom CORS middleware
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin'); // important for proxies
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-  // Allow preflight requests
+
   if (req.method === 'OPTIONS') {
+    // Preflight request
     return res.sendStatus(200);
   }
   next();
@@ -46,13 +45,11 @@ app.post('/api/contact', async (req, res) => {
     }
   });
 
-  console.log("Using SMTP user:", process.env.brevo_user);
-
   try {
     await transporter.sendMail({
       from: `"Mola Caffe Contact" <${process.env.brevo_user}>`,
       to: 'onlycoins1905@gmail.com',
-      subject: subject,
+      subject,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
       html: `<p><strong>Name:</strong> ${name}<br>
              <strong>Email:</strong> ${email}<br><br>
