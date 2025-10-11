@@ -14,8 +14,11 @@ app.use(cors({
     'https://mola.mk',
     'https://www.mola.mk',
     'https://bediwrld.github.io'
-  ]
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
+app.options('/api/contact', cors()); // handle preflight
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
