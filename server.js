@@ -20,12 +20,15 @@ app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: "smtp-relay.brevo.com",
+    port: 587,
+    secure: false, // TLS
     auth: {
-      user: process.env.EMAIL_USER || 'pajazitiubejd1@gmail.com',
-      pass: process.env.EMAIL_PASS || 'tjle kbmr ssvt rqgg'
+      user: process.env.brevo_user,
+      pass: process.env.brevo_pass
     }
   });
+  
 
   try {
     await transporter.sendMail({
