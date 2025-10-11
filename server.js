@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -28,6 +29,8 @@ app.post('/api/contact', async (req, res) => {
       pass: process.env.brevo_pass
     }
   });
+  console.log("Using SMTP user:", process.env.brevo_user);
+
   
 
   try {
